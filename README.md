@@ -7,10 +7,27 @@
 ## Todo Web Project
 
 - [01/05] HTML과 CSS를 이용한 웹 페이지 설계
+- [01/07] 자바 스크립트를 이용한 이벤트 처리
+
+
 
 #### Reference
 
 - https://vuejstodo-aa185.firebaseapp.com/
+
+
+
+## Java Script
+
+- [01. 변수와 상수](js_workspace/js/variable.js)
+- [02. 연산자](js_workspace/js/operator.js)
+- [03. 제어문](js_workspace/js/command.js)
+- [04. 함수](js_workspace/js/function_test.js)
+- [05. 객체](js_workspace/js/object_test.js)
+- [06. String 객체](js_workspace/js/string_test.js)
+- [07. Array 객체](js_workspace/js/array_test.js)
+- [08. Date 객체](js_workspace/js/date_test.js)
+- [09. 이벤트](js_workspace/js/projectSelect.js)
 
 
 

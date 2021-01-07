@@ -1,0 +1,68 @@
+<!--
+* NAME		: projectList.html
+* DESC		: 인증후 제공되는 프로젝트 리스트 페이지
+* VER			: 1.0
+* @author	: 클라우드MSA
+* Copyright 2021 Multicampus All rights reserved
+-->
+<html>
+
+<head>
+    <title>Project List</title>
+    <script language="javascript" src="./js/projectSelect.js"></script>
+</head>
+
+<body>
+    <table width="912" cellpadding="0" cellspacing="0" align="center">
+        <tr bgcolor="#F3F3F3" height=10>
+            <td width="700" valign="middle"></td>
+        </tr>
+    </table>
+
+    <div align=center>
+        <h1>Project List</h1>
+
+        <HR WIDTH="45%" COLOR="#CCCCFF">
+        <div align='center'>
+
+            <table border="1" cellspacing="0" cellpadding="2">
+                <form name="list">
+                    <tr>
+                        <th bgcolor="#dfdfff" align="center">선택</th>
+                        <th bgcolor="#dfdfff" align="center">프로젝트명</th>
+                    </tr>
+                    <SCRIPT LANGUAGE="JavaScript">
+                        displayData();
+                    </SCRIPT>
+                </form>
+            </table>
+
+            <HR WIDTH="45%" COLOR="#CCCCFF">
+
+            <!-- Display Form Table -->
+            <table border="0" cellspacing="0" cellpadding="3">
+                <form name="display">
+                    <tr>
+                        <td><b>프로젝트 번호</b></td>
+                        <td>
+                            <input type="text" name="pno" size="46" readonly>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td><b>프로젝트 이름</b></td>
+                        <td>
+                            <input type="text" name="pname" size="46" readonly>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td><b>프로젝트 설명</b></td>
+                        <td>
+                            <textarea NAME="pdesc" ROWS="5" COLS="50" readonly></textarea>
+                        </td>
+                    </tr>
+                </form>
+            </table>
+        </div>
+</body>
+
+</html>
