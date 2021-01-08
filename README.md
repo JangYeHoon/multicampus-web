@@ -50,3 +50,8 @@
   - [01. 코드 분할](React/Advanced_Guides/Code_Division.js)
   - [02. Context.js](React/Advanced_Guides/Context.js)
 
+
+
+## [Sql_Exercise](sql_exercise/)
+
+- SQL 쿼리문을 연습하기 위한 문제들의 답
