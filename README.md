@@ -9,11 +9,16 @@
 - [01/05] HTML과 CSS를 이용한 웹 페이지 설계
 - [01/07] 자바 스크립트를 이용한 이벤트 처리
 
-
-
 #### Reference
 
 - https://vuejstodo-aa185.firebaseapp.com/
+
+
+
+## Django
+
+- Django를 이용한 실습
+- [01. Hello 실습][django_workspace/hello/]
 
 
 
