@@ -1,4 +1,7 @@
 from django.shortcuts import render
+from django.http import HttpResponseRedirect
+from django.urls import reverse
+from .models import Todo
 
 # Create your views(controller)
 # request로부터 parameter값 받아서 valid check
@@ -7,16 +10,20 @@ from django.shortcuts import render
 # view(template) 선택
 # todo_app/
 def index(request):
-    pass
+    todos = Todo.objects.all()
+    context = {"todos" : todos}
+    return render(request, 'todo_app/index.html', context)
 
 # todo_app/createTodo
 def createTodo(request):
-    pass
-
-# todo_app/todoList
-def todoList(request):
-    pass
+    todoContent = request.POST['todoContent']
+    new_todo = Todo(content=todoContent)
+    new_todo.save()
+    return HttpResponseRedirect((reverse("index")))
 
 # todo_app/deleteTodo
 def deleteTodo(request):
-    pass
+    delete_todo_id = request.GET['id']
+    todo = Todo.objects.get(id=delete_todo_id)
+    todo.delete()
+    return HttpResponseRedirect((reverse("index")))
