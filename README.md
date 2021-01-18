@@ -18,7 +18,7 @@
 ## Django
 
 - Django를 이용한 실습
-- [01. Hello 실습][django_workspace/hello/]
+- [01. Hello 실습](django_workspace/hello/)
 
 
 
