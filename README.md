@@ -19,6 +19,7 @@
 
 - Django를 이용한 실습
 - [01. Hello 실습](django_workspace/hello/)
+- [02. todo 실습](django_workspace/todo_with_django/)
 
 
 
