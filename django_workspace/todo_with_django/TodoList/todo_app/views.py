@@ -2,6 +2,7 @@ from django.shortcuts import render
 from django.http import HttpResponseRedirect
 from django.urls import reverse
 from .models import Todo
+from .forms import TodoForm
 
 # Create your views(controller)
 # request로부터 parameter값 받아서 valid check
@@ -16,8 +17,9 @@ def index(request):
 
 # todo_app/createTodo
 def createTodo(request):
-    todoContent = request.POST['todoContent']
-    new_todo = Todo(content=todoContent)
+    # todoContent = request.POST['todoContent']
+    # new_todo = Todo(content=todoContent)
+    new_todo = TodoForm(request.POST)
     new_todo.save()
     return HttpResponseRedirect((reverse("index")))
 
