@@ -1,20 +1,15 @@
-import React, {useState} from 'react';
-import { Form, Icon, Button } from 'semantic-ui-react'
+import React from 'react';
+import { Segment, Icon, Button, Input } from 'semantic-ui-react'
 
 function TodoInput(props) {
-    const {handleTodoInput} = props;
-    const [value, setValue] = useState('');
-
-    const handleChange = (event)=>{
-      setValue(event.target.value)
-    }
+    const {handleTodoInput, input, handleChange, handleTodoChange} = props;
+    
     return (
-        <Form onSubmit={() => handleTodoInput(value)}>
-            <Form.Group widths='equal'>
-                <input type="text" value={value} onChange={(event)=>handleChange(event)} />
-                <Form.Field control={Button}><Icon name='add'/></Form.Field>
-            </Form.Group>
-        </Form>
+        <Segment.Group raised>
+            <Input placeholder='Input...' value={input} onChange={(event)=>handleChange(event)}/>
+            <Button onClick={() => handleTodoInput(input)}><Icon name='add'/></Button>
+            <Button onClick={() => handleTodoChange(input)}><Icon name='exchange'/></Button>
+        </Segment.Group>
     );
 }
 

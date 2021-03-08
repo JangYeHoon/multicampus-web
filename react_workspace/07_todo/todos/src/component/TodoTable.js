@@ -10,16 +10,36 @@ function TodoTable(props) {
         {num:2, title:'일정2'}
     ]);
     const [maxNum, setMaxNum] = useState(3);
+    const [input, setInput] = useState('');
+    const [selectTodo, setSelectTodo] = useState(null);
+
+    const handleChange = (event)=>{
+        setInput(event.target.value);
+    }
 
     const handleTodoInput = ((inputText) => {
         if (inputText !== '') {
             setTodos(todos.concat({num:maxNum, title:inputText}));
             setMaxNum(maxNum + 1);
         }
+        setSelectTodo(null);
+        setInput('');
     })
 
     const handleTodoDelete = ((deleteNum) => {
         setTodos(todos.filter(todo => todo.num !== deleteNum));
+    })
+
+    const handleTodoChange = ((inputText) => {
+        if (selectTodo !== null) {
+            setTodos(todos.map(todo => todo.num === selectTodo.num ? {num:todo.num, title:inputText} : todo));
+            setSelectTodo(null);
+        }
+    })
+
+    const onToggle = ((changeTodo) => {
+        setInput(changeTodo.title)
+        setSelectTodo(changeTodo);
     })
 
     const handleTodoClear = (() => {
@@ -35,12 +55,12 @@ function TodoTable(props) {
             </Grid.Row>
             <Grid.Row centered columns={3} textAlign='center'>
                 <Grid.Column>
-                    <TodoInput handleTodoInput={handleTodoInput}/>
+                    <TodoInput input={input} handleChange={handleChange} handleTodoInput={handleTodoInput} handleTodoChange={handleTodoChange}/>
                 </Grid.Column>
             </Grid.Row>
             <Grid.Row centered columns={3}>
                 <Grid.Column>
-                    <TodoList todos={todos} handleTodoDelete={handleTodoDelete}/>
+                    <TodoList todos={todos} onToggle={onToggle} handleTodoDelete={handleTodoDelete}/>
                 </Grid.Column>
             </Grid.Row>
             <Grid.Row centered columns={3}>
