@@ -3,12 +3,14 @@ import ReactDOM from 'react-dom';
 import './index.css';
 import App from './App';
 import reportWebVitals from './reportWebVitals';
-import 'semantic-ui-css/semantic.min.css'
+import 'semantic-ui-css/semantic.min.css';
+import {Provider} from 'mobx-react';
+import TodoStore from './store/TodoStore';
 
 ReactDOM.render(
-  <React.StrictMode>
+  <Provider TodoStore={TodoStore}>
     <App />
-  </React.StrictMode>,
+  </Provider>,
   document.getElementById('root')
 );
 

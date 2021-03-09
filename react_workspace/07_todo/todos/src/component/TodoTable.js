@@ -13,13 +13,13 @@ function TodoTable(props) {
     const [input, setInput] = useState('');
     const [selectTodo, setSelectTodo] = useState(null);
 
-    const handleChange = (event)=>{
-        setInput(event.target.value);
+    const inputChange = (value)=>{
+        setInput(value);
     }
 
-    const handleTodoInput = ((inputText) => {
-        if (inputText !== '') {
-            setTodos(todos.concat({num:maxNum, title:inputText}));
+    const handleTodoInput = (() => {
+        if (input !== '') {
+            setTodos(todos.concat({num:maxNum, title:input}));
             setMaxNum(maxNum + 1);
         }
         setSelectTodo(null);
@@ -30,15 +30,16 @@ function TodoTable(props) {
         setTodos(todos.filter(todo => todo.num !== deleteNum));
     })
 
-    const handleTodoChange = ((inputText) => {
+    const handleTodoChange = (() => {
         if (selectTodo !== null) {
-            setTodos(todos.map(todo => todo.num === selectTodo.num ? {num:todo.num, title:inputText} : todo));
+            setTodos(todos.map(todo => todo.num === selectTodo.num ? {num:todo.num, title:input} : todo));
             setSelectTodo(null);
+            setInput('');
         }
     })
 
     const onToggle = ((changeTodo) => {
-        setInput(changeTodo.title)
+        setInput(changeTodo.title);
         setSelectTodo(changeTodo);
     })
 
@@ -55,7 +56,7 @@ function TodoTable(props) {
             </Grid.Row>
             <Grid.Row centered columns={3} textAlign='center'>
                 <Grid.Column>
-                    <TodoInput input={input} handleChange={handleChange} handleTodoInput={handleTodoInput} handleTodoChange={handleTodoChange}/>
+                    <TodoInput input={input} inputChange={inputChange} handleTodoInput={handleTodoInput} handleTodoChange={handleTodoChange}/>
                 </Grid.Column>
             </Grid.Row>
             <Grid.Row centered columns={3}>
