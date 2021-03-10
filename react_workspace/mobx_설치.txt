@@ -1,0 +1,26 @@
+//1. mobx ,mobx-react 라이브러리 추가
+yarn add mobx mobx-react --save
+
+//2. decorator 설치  (@decorator - babel 파싱)
+//cofing 조정
+
+//1)git commit  : local repository에 source commit 
+//git commit 오류 발생시  .git 삭제->git init->git add .
+git commit -m "message"
+
+//2)package json config 수정
+2-1) yarn eject
+
+2-2) pakcage.json decorator해석할 수 있도록 babel plugin 추가
+(ref: https://mobx.js.org/enabling-decorators.html)
+ "babel": {
+    "presets": [
+      "react-app"
+    ],
+    "plugins": [
+      ["@babel/plugin-proposal-decorators", { "legacy": true }],
+      ["@babel/plugin-proposal-class-properties", { "loose": false }]
+    ]
+  }
+
+
