@@ -1,0 +1,41 @@
+#API추가 - yarn add axios
+ 1. backend  project/project/urls.py
+    URL = '/api/totos/'
+
+2.    backend api 호출 기능 추가
+    backend project/app/urls.py
+ 
+    todoXxx(){
+	return axios.method( this.URL+['url/${param}/']).then((response)=> response && response.data || null);
+     }
+
+
+#Store 수정
+1. api객체 = new XxxApi();
+2. @action에서 api객체.method호출
+    async / await 
+    runInAction(() =>{ observabledata = 값할당 } )
+
+
+#backend integration proxy추가 
+1. yarn add http-proxy-middleware
+2. src/setupProxy.js 생성
+const { createProxyMiddleware } = require('http-proxy-middleware');
+
+module.exports = function(app) {
+  app.use(
+    '/api/todos/',
+    createProxyMiddleware({
+      target: 'http://localhost:8000/',
+      changeOrigin: true,
+    })
+  );
+
+  app.use(
+    '/api/books/',
+    createProxyMiddleware({
+      target: 'http://localhost:8001/',
+      changeOrigin: true,
+    })
+  );
+};
