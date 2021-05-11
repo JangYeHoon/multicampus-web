@@ -24,7 +24,6 @@
 ## React
 
 - React docs에서 제공하는 문서 정리
-
   - [Main Concepts](react_workspace/Main_Concepts)
   - [Advanced_Guides](react_workspace/Advanced_Guides)
 
