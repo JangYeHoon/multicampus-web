@@ -9,7 +9,7 @@
         <span>글 작성</span>
     </div>
     <div id='post-add'>
-        <form method='POST'>
+        <form method='POST' enctype='multipart/form-data'>
             {% csrf_token %}
             <div>
                 <label>제목</label>
@@ -18,6 +18,10 @@
             <div>
                 <label>내용</label>
                 <textarea name='content' cols='50' rows='10'></textarea>
+            </div>
+            <div>
+                <label>썸네일</label>
+                <input name='thumbnail' type='file'>
             </div>
             <button type='submit' class='btn btn-primary'>작성</button>
         </form>
