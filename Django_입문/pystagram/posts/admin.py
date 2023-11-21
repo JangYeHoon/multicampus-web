@@ -38,3 +38,10 @@ class CommentAdmin(admin.ModelAdmin):
         'post',
         'content',
     ]
+
+@admin.register(HashTag)
+class HashTagAdmin(admin.ModelAdmin):
+    name = models.CharField('태그명', max_length=50)
+
+    def __str__(self):
+        return self.name
