@@ -31,3 +31,6 @@ class Comment(models.Model):
 
 class HashTag(models.Model):
     name = models.CharField('태그명', max_length=50)
+
+    def __str__(self):
+        return self.name

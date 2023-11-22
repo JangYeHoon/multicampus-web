@@ -25,8 +25,12 @@ def comment_add(request):
         comment = form.save(commit=False)
         comment.user = request.user
         comment.save()
-        url = reverse('posts:feeds') + f'#post-{comment.post.id}'
-        return HttpResponseRedirect(url)
+
+        if request.GET.get('next'):
+            url_next = request.GET.get('next')
+        else:
+            url_next = reverse('posts:feeds') + f'#post-{comment.post.id}'
+        return HttpResponseRedirect(url_next)
 
 @require_POST
 def comment_delete(request, comment_id):
@@ -54,6 +58,13 @@ def post_add(request):
                     photo=image_file,
                 )
             
+            tag_string = request.POST.get('tags')
+            if tag_string:
+                tag_names = [tag_name.strip() for tag_name in tag_string.split(',')]
+                for tag_name in tag_names:
+                    tag, _ = HashTag.objects.get_or_create(name=tag_name)
+                    post.tags.add(tag)
+            
             url = reverse('posts:feeds') + f'#post-{post.id}'
             return HttpResponseRedirect(url)
     else:
@@ -61,3 +72,26 @@ def post_add(request):
     
     context = {'form': form}
     return render(request, 'posts/post_add.html', context)
+
+def tags(request, tag_name):
+    try:
+        tag = HashTag.objects.get(name=tag_name)
+    except HashTag.DoesNotExist:
+        posts = Post.objects.none()
+    else:
+        posts = Post.objects.filter(tags=tag)
+
+    context = {
+        'tag_name': tag_name,
+        'posts': posts,
+    }
+    return render(request, 'posts/tags.html', context)
+
+def post_detail(request, post_id):
+    post = Post.objects.get(id=post_id)
+    comment_form = CommentForm()
+    context = {
+        'post': post,
+        'comment_form': comment_form,
+    }
+    return render(request, 'posts/post_detail.html', context)

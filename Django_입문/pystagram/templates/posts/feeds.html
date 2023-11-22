@@ -1,72 +1,18 @@
 {% extends "base.html" %}
 {% block content %}
-    <nav>
-        <h1><a href="{% url 'posts:feeds' %}">Pystagram</a></h1>
-        <a href="{% url 'posts:post_add' %}">Add post</a>
-        <a href={% url 'users:logout' %}>Logout</a>
-    </nav>
-    <div id='feeds' class='post-container'>
-        {% for post in posts %}
-            <article id='post-{{ post.id }}' class='post'>
-                <header class='post-header'>
-                    {% if post.user.profile_image %}
-                        <img src='{{ post.user.profile_image.url }}'>
-                    {% endif %}
-                    <span>{{ post.user.username }}</span>
-                </header>
-                <div class='post-images'>
-                    <div class='splide__track'>
-                        <ul class='splide__list'>
-                            {% for image in post.postimage_set.all %}
-                                {% if image.photo %}
-                                    <li class='splide__slide'>
-                                        <img src='{{ image.photo.url }}'>
-                                    </li>
-                                {% endif %}
-                            {% endfor %}
-                        </ul>
-                    </div>
-                </div>
-                <div class='post-content'>
-                    {{ post.content|linebreaks }}
-                </div>
-                <div class='post-buttons'>
-                    <button>Likes(0)</button>
-                    <span>Comments({{ post.comment_set.count }})</span>
-                </div>
-                <div class='post-comments'>
-                    <ul>
-                        {% for comment in post.comment_set.all %}
-                            <li>
-                                <span>{{ comment.user.username }}</span>
-                                <span>{{ comment.content }}</span>
-
-                                {% if user == comment.user %}
-                                    <form method='POST' action="{% url 'posts:comment_delete' comment_id=comment.id %}">
-                                        {% csrf_token %}
-                                        <button type='submit'>삭제</button>
-                                    </form>
-                                {% endif %}
-                            </li>
-                        {% endfor %}
-                    <ul>
-                </div>
-                <small>{{ post.created }}</small>
-                <div class='post-comment-create'>
-                    <form method='POST' action="{% url 'posts:comment_add' %}">
-                        {% csrf_token %}
-                        <input type='hidden' name='post' value='{{ post.id }}'>
-                        {{ comment_form.content }}
-                        <button type='sumbit'>게시</button>
-                    </form>
-                </div>
-            </article>
-        {% endfor %}
-    </div>
-    <scirpt>
-        const elms = document.getElementsByClassName('splide')
-        for (let i = 0; i < elms.length; i++) {
-            new Splide(elms[i]).mount()
-        }
-    </script>
+{% include 'nav.html' %}
+<div id='feeds' class='post-container'>
+    {% for post in posts %}
+        {% with post.id|stringformat:"s" as post_id %}
+            {% url 'posts:feeds' as action_redirect_to %}
+            {% include 'posts/post.html' with action_redirect_url=action_redirect_to|add:'#post-'|add:post_id %}
+        {% endwith %}
+    {% endfor %}
+</div>
+<script>
+    const elms = document.getElementsByClassName('splide')
+    for (let i = 0; i < elms.length; i++) {
+        new Splide(elms[i]).mount()
+    }
+</script>
 {% endblock %}
