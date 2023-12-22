@@ -1,9 +1,11 @@
 <article id='post-{{ post.id }}' class='post'>
     <header class='post-header'>
-        {% if post.user.profile_image %}
-            <img src='{{ post.user.profile_image.url }}'>
-        {% endif %}
-        <span>{{ post.user.username }}</span>
+        <a href="{% url 'users:profile' user_id=post.user.id %}">
+            {% if post.user.profile_image %}
+                <img src='{{ post.user.profile_image.url }}'>
+            {% endif %}
+            <span>{{ post.user.username }}</span>
+        </a>
     </header>
     <div class='post-images splide'>
         <div class='splide__track'>
