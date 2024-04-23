@@ -1,24 +1,26 @@
-from django.contrib.auth.models import User
-from django.contrib.auth.password_validation import validate_password
+from django.contrib.auth.models import User                 # User 모델
+from django.contrib.auth.password_validation import validate_password       # Django의 기본 패스워드 검증 도구
 from django.contrib.auth import authenticate
 
 from rest_framework import serializers
-from rest_framework.authtoken.models import Token
-from rest_framework.validators import UniqueValidator
+from rest_framework.authtoken.models import Token           # Token 모델
+from rest_framework.validators import UniqueValidator       # 이메일 중복 방지를 위한 검증 도구
 
 from .models import Profile
 
 class RegisterSerializer(serializers.ModelSerializer):
     email = serializers.EmailField(
+        help_text="이메일(Unique)",
         required=True,
         validators=[UniqueValidator(queryset=User.objects.all())],
     )
     password = serializers.CharField(
+        help_text="비밀번호",
         write_only=True,
         required=True,
         validators=[validate_password],
     )
-    password2 = serializers.CharField(write_only=True, required=True)
+    password2 = serializers.CharField(help_text="비밀번호 재입력",write_only=True, required=True)
 
     class Meta:
         model = User

@@ -44,9 +44,11 @@ INSTALLED_APPS = [
     'corsheaders',
     'posts',
     'django_filters',
+    'drf_yasg',
 ]
 
 MIDDLEWARE = [
+    'myboard.custom_exception_handler.ExceptionMiddleware',
     'corsheaders.middleware.CorsMiddleware',
     'django.middleware.security.SecurityMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
@@ -118,6 +120,7 @@ REST_FRAMEWORK = {
     'rest_framework.pagination.PageNumberPagination',
     'PAGE_SIZE':
     3,
+    'EXCEPTION_HANDLER': 'myboard.custom_exception_handler.handle_exception',
 }
 
 

@@ -17,11 +17,11 @@ class CommentCreateSerializer(serializers.ModelSerializer):
 
 class PostSerializer(serializers.ModelSerializer):
     profile = ProflieSerializer(read_only=True)
-    comment = CommentSerializer(many=True, read_only=True)
+    comments = CommentSerializer(many=True, read_only=True)
 
     class Meta:
         model = Post
-        fields = ('pk', 'profile', 'title', 'body', 'image', 'published_date', 'likes')
+        fields = ('pk', 'profile', 'title', 'body', 'image', 'published_date', 'likes', 'comments')
 
 class PostCreateSerializer(serializers.ModelSerializer):
     class Meta:
